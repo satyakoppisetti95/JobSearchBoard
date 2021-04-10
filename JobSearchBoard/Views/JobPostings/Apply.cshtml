@@ -1,0 +1,44 @@
+﻿@model JobSearchBoard.Models.JobApplication
+
+@{
+    ViewData["Title"] = "Apply";
+}
+
+<h1>Apply</h1>
+
+<div>
+    <h4>Apply to  @ViewBag.JobPostingTitle</h4>
+    <hr />
+    @if (ViewBag.application_exists == null ? true : ViewBag.application_exists)
+    {
+
+        <h1>You have already applied to this Job!</h1>
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-md-4">
+                <form asp-action="Apply" >
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        
+                        <input type="hidden" asp-for="JobPostingID" class="form-control" value="@ViewBag.JobPostingID" />
+                        <span asp-validation-for="JobPostingID" class="text-danger"></span>
+                    </div>
+                   
+                    <div class="form-group">
+                        <input type="submit" value="Apply" class="btn btn-primary" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    }
+
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

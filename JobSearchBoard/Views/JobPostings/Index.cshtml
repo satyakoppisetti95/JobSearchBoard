@@ -1,0 +1,66 @@
+﻿@model IEnumerable<JobSearchBoard.Models.JobPosting>
+
+
+@{
+    ViewData["Title"] = "JobPostings";
+}
+
+
+
+<div class="container">
+    <h1>Job Postings</h1>
+
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Create New</a>
+    </p>
+
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-4 col-sm-12 col-md-3" style="margin-bottom:36px">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.Company)</h6>
+                        <p class="card-text" style="white-space:nowrap;overflow:hidden">@Html.DisplayFor(modelItem => item.Description)</p>
+
+                        <a asp-action="Details" class="card-link" asp-route-id="@item.ID">Details</a>
+
+
+                        @if (ViewBag.applied_job_ids.Contains(item.ID))
+                        {
+                            <a class="card-link disabled">Applied!</a>
+                        }
+                        else
+                        {
+                            <a asp-action="Apply" class="card-link" asp-route-JobID="@item.ID">Apply</a>
+                        }
+
+                        <a class="card-link" href="javascript:share('@Html.DisplayFor(modelItem => item.Title)','@Html.DisplayFor(modelItem => item.Description)','@Url.Action("Details","JobPostings",new  { ID=item.ID})')">Share</a>
+
+
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+<script>
+    function share(title,text,url) {
+        if (!("share" in navigator)) {
+            alert('Web Share API not supported.');
+            return;
+        }
+
+        navigator.share({
+            title: title,
+            text: text,
+            url: url
+        })
+            .then(() => console.log('Successful share'))
+            .catch(error => console.log('Error sharing:', error));
+    }
+</script>
+

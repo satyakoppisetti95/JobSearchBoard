@@ -1,0 +1,42 @@
+﻿@model IEnumerable<JobSearchBoard.Models.JobPosting>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+
+
+
+<div class="container">
+    <h1>My Job Postings</h1>
+
+    <p>
+        <a asp-action="Create" class="btn btn-primary">Create New</a>
+    </p>
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-4 col-sm-12 col-md-3" style="margin-bottom:36px">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">@Html.DisplayFor(modelItem => item.Title)</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">@Html.DisplayFor(modelItem => item.Company)</h6>
+                        <p class="card-text" style="white-space:nowrap;overflow:hidden">@Html.DisplayFor(modelItem => item.Description)</p>
+
+
+                        <a asp-action="Edit" class="card-link" asp-route-id="@item.ID">Edit</a>
+                        <a asp-action="Details" class="card-link" asp-route-id="@item.ID">Details</a>
+                        <a asp-action="Delete" class="card-link" asp-route-id="@item.ID">Delete</a>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+

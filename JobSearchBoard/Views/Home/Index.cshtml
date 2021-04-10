@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+
+    @if (this.User.Identity.IsAuthenticated)
+    {
+        <a href="/JobPostings"><button type="button" class="btn btn-primary">View Job Postings</button> </a>
+    }
+    else
+    {
+        <h2><a href="/Identity/Account/Register">Register</a> or <a href="/Identity/Account/Login">login</a> to view Job Postings</h2>
+    }
+</div>

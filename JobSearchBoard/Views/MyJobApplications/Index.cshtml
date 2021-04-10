@@ -1,0 +1,44 @@
+﻿@model IEnumerable<JobSearchBoard.Models.JobApplication>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Withdraw Application</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.JobPosting.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobPosting.Company)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AppliedDateTime)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <a asp-action="Details" asp-controller="JobPostings" asp-route-id="@item.JobPostingID"> @Html.DisplayFor(modelItem => item.JobPosting.Title) </a>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobPosting.Company)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AppliedDateTime)
+            </td>
+            <td>
+
+                <a asp-action="Delete" asp-route-id="@item.ID">Withdraw Application</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
